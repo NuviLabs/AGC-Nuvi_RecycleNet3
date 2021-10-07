@@ -63,4 +63,16 @@ class Nuvi_RecycleNet():
             img = np.rot90(img_array)
 
         return img
+        
+    def infer_drs(self, img):
+        """Inference image(s) with the detector.
+    
+        Args:
+            imgs (str/ndarray or list[str/ndarray]): Either image files or loaded
+                images.
+    
+        Returns:
+            If imgs is a str, a generator will be returned, otherwise return the
+            detection results directly.
+        """
     
