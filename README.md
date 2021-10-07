@@ -11,3 +11,14 @@ The classes to be detected are:
 - PET
 - plastic
 - plasticbag
+- 
+## Usage:
+
+Installation
+
+
+Run inference
+
+Will return a dictionary with the following format:
+{'Annotations': [{'Label': 'steel', 'Bbox': [X1, Y1, X2, Y2], 'Confidence': 0~1}]}  
+The bbox format follows: [xmin, ymin, xmax, ymax]
