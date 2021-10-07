@@ -90,4 +90,19 @@ class Nuvi_RecycleNet():
         test_pipeline = pipelines.Compose(cfg.data.test.pipeline)
         data = test_pipeline(data)
         data = collate([data], samples_per_gpu=1)
+        if next(self.model.parameters()).is_cuda:
+            # scatter to specified GPU
+            data = scatter(data, [0])[0]
+        else:
+            for m in self.model.modules():
+                assert not isinstance(
+                    m, RoIPool
+                ), 'CPU inference with RoIPool is not supported currently.'
+            # just get the actual data from DataContainer
+            data['img_metas'] = data['img_metas'][0].data
+    
+        # forward the model
+        with torch.no_grad():
+            result = self.model(return_loss=False, rescale=True, **data)[0]
+        return result
     
