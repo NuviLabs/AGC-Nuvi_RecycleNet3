@@ -23,3 +23,11 @@ parser.add_argument('--threshold', default=0.6, type=float,
 parser.add_argument('--use_tta', dest='use_tta', action='store_true',
                     help='Either use TTA to help detect images.')
 parser.set_defaults(use_tta=False)
+
+if __name__ == '__main__':
+
+    arg = parser.parse_args()
+    recyclernet = Nuvi_RecycleNet(arg.config_file,
+                                  arg.checkpoint_file,
+                                  arg.threshold,
+                                  tta=arg.use_tta)
