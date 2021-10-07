@@ -32,16 +32,16 @@ if __name__ == '__main__':
                                   arg.threshold,
                                   tta=arg.use_tta)
     image_list = []
-    img_ext = ('png', 'jpg', 'JPG', 'jpeg', 'PNG', 'JPEG')
+    IMG_EXT = ('png', 'jpg', 'JPG', 'jpeg', 'PNG', 'JPEG')
     if osp.isdir(arg.img_path):
         # append all image files in folder into image_list
         arg.img_path = osp.join(arg.img_path, '') 
-        for ext in img_ext:
+        for ext in IMG_EXT:
                 image_list.extend(glob.glob(arg.img_path + '*.' + ext))
 
     elif osp.isfile(arg.img_path):
         file_ext = osp.splitext()[-1]
-        if file_ext in img_ext:
+        if file_ext in IMG_EXT:
             image_list.append(arg.img_path)
 
     if len(image_list):
