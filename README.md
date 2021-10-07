@@ -25,6 +25,8 @@ Installation
 
 Run inference
 
+    python main.py --img_path ./sample_img.jpg
+
 Will return a dictionary with the following format:  
 
     {'Annotations': [{'Label': 'steel', 'Bbox': [X1, Y1, X2, Y2], 'Confidence': 0~1}]}
