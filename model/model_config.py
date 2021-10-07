@@ -311,3 +311,26 @@ data = dict(
                     dict(type='Collect', keys=['img'])
                 ])
         ]))
+evaluation = dict(interval=1, metric='bbox')
+test_Flag = False
+optimizer = dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001)
+optimizer_config = dict(grad_clip=None)
+lr_config = dict(
+    policy='step',
+    warmup='linear',
+    warmup_iters=500,
+    warmup_ratio=0.001,
+    step=[40, 55])
+total_epochs = 100
+checkpoint_config = dict(interval=1)
+log_config = dict(
+    interval=10,
+    hooks=[dict(type='WandbLoggerHook'),
+           dict(type='TextLoggerHook')])
+dist_params = dict(backend='nccl')
+log_level = 'INFO'
+load_from = None
+resume_from = None
+workflow = [('train', 1)]
+work_dir = './AI_cha_2nd/dRS_r50_201117_1280_seed10_g01_FinalwOSample_b16'
+gpu_ids = range(0, 1)
