@@ -239,3 +239,75 @@ test_pipeline = [
             dict(type='Collect', keys=['img'])
         ])
 ]
+data = dict(
+    samples_per_gpu=8,
+    workers_per_gpu=1,
+    train=dict(
+        type='AI_cha_2nd',
+        ann_file=
+        '/home/ubuntu/AI_GRAND_CHALLANGE_2020/only_2nd_dataset/2nd_COCO_Final_AUG_LUCA_Merge_T_V/annotations.json',
+        img_prefix=
+        '/home/ubuntu/AI_GRAND_CHALLANGE_2020/only_2nd_dataset/2nd_COCO_Final_AUG_LUCA_Merge_T_V/',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations', with_bbox=True),
+            dict(type='Resize', img_scale=(1280, 720), keep_ratio=True),
+            dict(type='RandomFlip', flip_ratio=0.5),
+            dict(
+                type='Normalize',
+                mean=[123.675, 116.28, 103.53],
+                std=[58.395, 57.12, 57.375],
+                to_rgb=True),
+            dict(type='Pad', size_divisor=32),
+            dict(type='DefaultFormatBundle'),
+            dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels'])
+        ]),
+    val=dict(
+        type='AI_cha_2nd',
+        ann_file=
+        '/home/ubuntu/AI_GRAND_CHALLANGE_2020/only_2nd_dataset/201027_Sample_COCO/annotations.json',
+        img_prefix=
+        '/home/ubuntu/AI_GRAND_CHALLANGE_2020/only_2nd_dataset/201027_Sample_COCO/',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(
+                type='MultiScaleFlipAug',
+                img_scale=(1280, 720),
+                flip=False,
+                transforms=[
+                    dict(type='Resize', keep_ratio=True),
+                    dict(type='RandomFlip'),
+                    dict(
+                        type='Normalize',
+                        mean=[123.675, 116.28, 103.53],
+                        std=[58.395, 57.12, 57.375],
+                        to_rgb=True),
+                    dict(type='Pad', size_divisor=32),
+                    dict(type='ImageToTensor', keys=['img']),
+                    dict(type='Collect', keys=['img'])
+                ])
+        ]),
+    test=dict(
+        type='AI_cha_2nd',
+        ann_file=
+        '/home/ubuntu/Datasets/AI_cha_2nd/201027_Sample_COCO/annotations.json',
+        img_prefix='/home/ubuntu/Datasets/AI_cha_2nd/201027_Sample_COCO/',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(
+                type='MultiScaleFlipAug',
+                img_scale=(1280, 720),
+                flip=False,
+                transforms=[
+                    dict(type='Resize', keep_ratio=True),
+                    dict(type='RandomFlip'),
+                    dict(
+                        type='Normalize',
+                        mean=[123.675, 116.28, 103.53],
+                        std=[58.395, 57.12, 57.375],
+                        to_rgb=True),
+                    dict(type='Pad', size_divisor=32),
+                    dict(type='ImageToTensor', keys=['img']),
+                    dict(type='Collect', keys=['img'])
+                ])
+        ]))
