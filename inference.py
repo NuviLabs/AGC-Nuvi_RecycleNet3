@@ -17,6 +17,7 @@ from mmcv.ops import RoIPool
 from mmcv.parallel import collate, scatter
 
 
+
 class Nuvi_RecycleNet():
     def __init__(self,
                  config_file,
@@ -62,8 +63,8 @@ class Nuvi_RecycleNet():
             print('augmented', augment_type)
             img = np.rot90(img_array)
 
-        return imggit 
-        
+        return img
+    
     def infer_drs(self, img):
         """Inference image(s) with the detector.
     
@@ -86,7 +87,8 @@ class Nuvi_RecycleNet():
             cfg.data.test.pipeline[0].type = 'LoadImageFromWebcam'
         else:
             # add information into dict
-            data = dict(img_info=dict(filename=img), img_prefix=None)# build the data pipeline
+            data = dict(img_info=dict(filename=img), img_prefix=None)
+        # build the data pipeline
         test_pipeline = pipelines.Compose(cfg.data.test.pipeline)
         data = test_pipeline(data)
         data = collate([data], samples_per_gpu=1)
@@ -105,7 +107,8 @@ class Nuvi_RecycleNet():
         with torch.no_grad():
             result = self.model(return_loss=False, rescale=True, **data)[0]
         return result
-        
+
+
     def predict(self, img_path):
         imageArray = cv2.imread(img_path)
         # Run inference using a model on a single picture -> img can be either path or array
@@ -130,6 +133,7 @@ class Nuvi_RecycleNet():
         json_result = self.make_json(res_idxs)
 
         return json_result
+
     def make_json(self, results):
         json_dict = {'Annotations': []}
         for result in results:
