@@ -11,7 +11,8 @@ The classes to be detected are:
 - PET
 - plastic
 - plasticbag
-- 
+
+
 ## Usage:
 
 Installation
