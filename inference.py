@@ -132,3 +132,13 @@ class Nuvi_RecycleNet():
         return json_result
     def make_json(self, results):
         json_dict = {'Annotations': []}
+        for result in results:
+            label_idx = result[0]
+            bbox = result[1][:4].tolist()
+            score = result[1][-1]
+            label_name = self.classes[label_idx]
+
+            dict_result = {'Label': label_name, 'Bbox': bbox, 'Confidence': score}
+            json_dict['Annotations'].append(dict_result)
+
+        return json_dict
