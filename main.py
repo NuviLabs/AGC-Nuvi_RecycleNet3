@@ -33,7 +33,8 @@ if __name__ == '__main__':
                                   tta=arg.use_tta)
     image_list = []
     if osp.isdir(arg.img_path):
-        arg.img_path = osp.join(arg.img_path, '')
+        # append all image files in folder into image_list
+        arg.img_path = osp.join(arg.img_path, '') 
         img_ext = ('png', 'jpg', 'JPG', 'jpeg', 'PNG', 'JPEG')
         for ext in img_ext:
                 image_list.extend(glob.glob(arg.img_path + '*.' + ext))
@@ -43,4 +44,5 @@ if __name__ == '__main__':
 
     for path in image_list:
         json_result = recyclernet.predict(path)
+        print(path)
         print(json_result)
