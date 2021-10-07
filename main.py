@@ -41,3 +41,6 @@ if __name__ == '__main__':
     elif osp.isfile(arg.img_path):
         image_list.append(arg.img_path)
 
+    for path in image_list:
+        json_result = recyclernet.predict(path)
+        print(json_result)
