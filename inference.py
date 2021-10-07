@@ -24,7 +24,7 @@ class Nuvi_RecycleNet():
                  checkpoint_file,
                  threshold,
                  device='cuda:0',
-                 tta=True):
+                 tta=False):
 
         self.config_file = config_file
         self.config_drs = Config.fromfile(config_file)
