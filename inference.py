@@ -86,5 +86,8 @@ class Nuvi_RecycleNet():
             cfg.data.test.pipeline[0].type = 'LoadImageFromWebcam'
         else:
             # add information into dict
-            data = dict(img_info=dict(filename=img), img_prefix=None)
+            data = dict(img_info=dict(filename=img), img_prefix=None)# build the data pipeline
+        test_pipeline = pipelines.Compose(cfg.data.test.pipeline)
+        data = test_pipeline(data)
+        data = collate([data], samples_per_gpu=1)
     
