@@ -130,4 +130,5 @@ class Nuvi_RecycleNet():
         json_result = self.make_json(res_idxs)
 
         return json_result
-    
+    def make_json(self, results):
+        json_dict = {'Annotations': []}
