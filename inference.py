@@ -105,4 +105,11 @@ class Nuvi_RecycleNet():
         with torch.no_grad():
             result = self.model(return_loss=False, rescale=True, **data)[0]
         return result
+        
+    def predict(self, img_path):
+        imageArray = cv2.imread(img_path)
+        # Run inference using a model on a single picture -> img can be either path or array
+        result = self.infer_drs(imageArray)
+        # result = inference_detector(self.model, imageArray)
+        res_idxs = [[i, k[0]] for i, k in enumerate(result) if k.size != 0 and (k[:,4] > self.threshold).any()]
     
