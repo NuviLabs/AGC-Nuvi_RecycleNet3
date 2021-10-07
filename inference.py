@@ -62,7 +62,7 @@ class Nuvi_RecycleNet():
             print('augmented', augment_type)
             img = np.rot90(img_array)
 
-        return img
+        return imggit 
         
     def infer_drs(self, img):
         """Inference image(s) with the detector.
@@ -75,4 +75,16 @@ class Nuvi_RecycleNet():
             If imgs is a str, a generator will be returned, otherwise return the
             detection results directly.
         """
+        cfg = self.config_drs
+        device = next(self.model.parameters()).device  # model device
+        # prepare data
+        if isinstance(img, np.ndarray):
+            # directly add img
+            data = dict(img=img)
+            cfg = cfg.copy()
+            # set loading pipeline type
+            cfg.data.test.pipeline[0].type = 'LoadImageFromWebcam'
+        else:
+            # add information into dict
+            data = dict(img_info=dict(filename=img), img_prefix=None)
     
