@@ -31,3 +31,13 @@ if __name__ == '__main__':
                                   arg.checkpoint_file,
                                   arg.threshold,
                                   tta=arg.use_tta)
+    image_list = []
+    if osp.isdir(arg.img_path):
+        arg.img_path = osp.join(arg.img_path, '')
+        img_ext = ('png', 'jpg', 'JPG', 'jpeg')
+        for ext in img_ext:
+                image_list.extend(glob.glob(arg.img_path + '*.' + ext))
+
+    elif osp.isfile(arg.img_path):
+        image_list.append(arg.img_path)
+
