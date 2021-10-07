@@ -17,6 +17,11 @@ The classes to be detected are:
 
 Installation
 
+    cd mmvc
+    MMCV_WITH_OPS=1 pip install -e .
+    pip install mmdet==2.6.0
+
+
 
 Run inference
 
