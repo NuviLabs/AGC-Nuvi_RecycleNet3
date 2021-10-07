@@ -112,4 +112,22 @@ class Nuvi_RecycleNet():
         result = self.infer_drs(imageArray)
         # result = inference_detector(self.model, imageArray)
         res_idxs = [[i, k[0]] for i, k in enumerate(result) if k.size != 0 and (k[:,4] > self.threshold).any()]
+        if self.tta and not res_idxs:
+            # Determine which augmentations to do when there is no detection. In order
+            aug_type = ['LR', 'UDR', 'RT', 'Break']
+            aug_idx = 0
+            res_idxs = []
+            while not res_idxs:
+                augment_type = aug_type[aug_idx]
+                if augment_type == 'Break':
+                    result = [np.asarray([]) for i in range(8)]
+                    break
+                print('TTA type: ', augment_type)
+                img_transformed = self.augmentIMG(imageArray, augment_type)
+                result = self.infer_drs(imageArray)
+                res_idxs = [[i, k[0]] for i, k in enumerate(result[0]) if k.size != 0 and (k[:,4] > self.threshold).any()]
+
+        json_result = self.make_json(res_idxs)
+
+        return json_result
     
