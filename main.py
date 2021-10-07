@@ -44,7 +44,10 @@ if __name__ == '__main__':
         if file_ext in img_ext:
             image_list.append(arg.img_path)
 
-    for path in image_list:
-        json_result = recyclernet.predict(path)
-        print(path)
-        print(json_result)
+    if len(image_list):
+        for path in image_list:
+            json_result = recyclernet.predict(path)
+            print(path)
+            print(json_result)
+    else:
+        print('No image file in the directory or the file is not an image file.')
