@@ -21,7 +21,9 @@ Installation
     MMCV_WITH_OPS=1 pip install -e .
     pip install mmdet==2.6.0
 
+Get model weights
 
+    wget https://luca-ai-models.s3.ap-northeast-2.amazonaws.com/recyclenet3/model_checkpoint.pth -P ./models/
 
 Run inference
 
