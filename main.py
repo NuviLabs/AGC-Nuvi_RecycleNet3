@@ -41,7 +41,7 @@ if __name__ == '__main__':
                 image_list.extend(glob.glob(arg.img_path + '*' + ext.upper()))
 
     elif osp.isfile(arg.img_path):
-        file_ext = osp.splitext()[-1].lower()
+        file_ext = osp.splitext(arg.img_path)[-1].lower()
         if file_ext in IMG_EXT:
             image_list.append(arg.img_path)
 

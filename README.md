@@ -23,7 +23,7 @@ Installation
 
 Get model weights
 
-    wget https://luca-ai-models.s3.ap-northeast-2.amazonaws.com/recyclenet3/model_checkpoint.pth -P ./models/
+    wget https://luca-ai-models.s3.ap-northeast-2.amazonaws.com/recyclenet3/model_checkpoint.pth -P ./model/
 
 Run inference
 
